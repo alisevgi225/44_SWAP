@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Default/Index.cshtml";
+}
+
+
+<!-- Banner Top -->
+@await Html.PartialAsync("/Views/HomePage/Banner.cshtml")
+<!-- End Banner Top -->
+@await Html.PartialAsync("/Views/HomePage/MarketMenu.cshtml")
+
+@await Html.PartialAsync("/Views/HomePage/CoinList.cshtml")
+
+

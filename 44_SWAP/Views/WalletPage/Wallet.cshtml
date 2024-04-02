@@ -1,0 +1,114 @@
+﻿@model IEnumerable<CoinAndIcon>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Default/Index.cshtml";
+}
+<section class="page-title">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h3 class="heading">Cüzdanım</h3>
+			</div>
+			<div class="col-md-6">
+				<ul class="breadcrumb">
+					<li><a href="index.html">Home</a></li>
+					<li><p class="fs-18">/</p></li>
+					<li><p class="fs-18">Wallet</p></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="wallet buy-crypto flat-tabs">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content-tab">
+					<div class="content-inner">
+						<div class="wallet-main">
+							<h4 class="heading">Varlıklarım</h4>
+
+							<div class="wallet-body">
+								<div class="left">
+									<p>Toplam Özet</p>
+
+									<div class="Toplam Varlık USD">
+										<h6>@ViewBag.Varlik</h6>
+									</div>
+								</div>
+								<div class="right">
+									<form action="wallet-assets.html">
+										<div class="form-group">
+											<input type="text" placeholder="Search" />
+											<svg width="21"
+												 height="21"
+												 viewBox="0 0 21 21"
+												 fill="none"
+												 xmlns="http://www.w3.org/2000/svg">
+												<path d="M20 20L15.514 15.506L20 20ZM18 9.5C18 11.7543 17.1045 13.9163 15.5104 15.5104C13.9163 17.1045 11.7543 18 9.5 18C7.24566 18 5.08365 17.1045 3.48959 15.5104C1.89553 13.9163 1 11.7543 1 9.5C1 7.24566 1.89553 5.08365 3.48959 3.48959C5.08365 1.89553 7.24566 1 9.5 1C11.7543 1 13.9163 1.89553 15.5104 3.48959C17.1045 5.08365 18 7.24566 18 9.5V9.5Z"
+													  stroke="#B1B5C3"
+													  stroke-width="2"
+													  stroke-linecap="round" />
+											</svg>
+											<select class="" aria-label="USD">
+												<option selected>USD</option>
+												<option value="1">VND</option>
+												<option value="2">USDT</option>
+												<option value="3">USDC</option>
+											</select>
+										</div>
+										<button type="submit" class="btn-action">
+											Varlık Bakiyesi
+										</button>
+									</form>
+								</div>
+							</div>
+						</div>
+
+						<div class="coin-list-wallet">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th class="center" scope="col">Varlık</th>
+										<th scope="col">Fiyat</th>
+										<th scope="col">Miktar</th>
+										<th scope="col">Varlık Değer</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var item in Model)
+									{
+										<tr>
+											<td class="number">
+												<span>1</span>
+											</td>
+											<td class="asset">
+												<span class="@item.icon">
+													<span class="path1"></span><span class="path2"></span>
+												</span>
+												<p>
+													<span class="boild">@item.name</span>
+													<span class="unit">@item.name</span>
+												</p>
+											</td>
+											<td>
+												<span class="boild">@item.fiyat</span>
+											</td>
+											<td>
+												<span class="boild">@item.miktar</span>
+											</td>
+											<td>
+												<span class="boild">@item.varlikDeger</span>
+											</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

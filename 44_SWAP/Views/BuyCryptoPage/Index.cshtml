@@ -1,0 +1,121 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Coin>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Default/Index.cshtml";
+}
+
+<!-- PageTitle -->
+<section class="page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="heading">Swap İşlemleri</h3>
+            </div>
+            <div class="col-md-6">
+                <ul class="breadcrumb">
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><p class="fs-18">/</p></li>
+                    <li><p class="fs-18">Swap İşlemleri</p></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End PageTitle -->
+
+<section class="buy-crypto flat-tabs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="content-tab">
+                    <div class="content-inner buy-crypto__main">
+                        <div class="top">
+                            <ul class="top-list">
+                                <li class="active">
+                                    <h6><span></span>Para Birimi</h6>
+                                </li>
+                                <li>
+                                    <h6><span></span>İşlem Detayları</h6>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="main">
+                            <h6>Swap İşlemleri</h6>
+                            <p>Tüm swap işlemleriniz için birimleri seçiniz!</p>
+                            <form method="post" asp-action="Not" asp-controller="BuyCryptoPage">
+                                <div class="form-field">
+                                    <label>Satılan</label>
+                                    <select class="form-control gt" id="satilan" name="satilan">
+                                        @foreach (var item in Model)
+                                        {
+                                            <option value="@item.CoinBoild">@item.CoinBoild</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="icon-container">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+
+                                <div class="form-field">
+                                    <label>Alınan</label>
+                                    <select class="form-control gt" id="exampleFormControlSelect4" name="alinan">
+                                        @foreach (var item in Model)
+                                        {
+                                            <option value="@item.CoinBoild">@item.CoinBoild</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label>Miktar</label>
+                                    <input type="number" class="form-control" id="amountInput" name="miktar" placeholder="Miktarı giriniz" required>
+                                </div>
+                                <br />
+                                <button type="submit" class="btn-action">Devam et</button>
+                            </form>
+
+                            <div class="button"></div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-action").click(function (e) {
+                e.preventDefault();
+                var userConfirmation = confirm('Onaylıyor musunuz?');
+                if (userConfirmation) {
+                    var selectedSwap = $("#exampleFormControlSelect3").val(); // Adjust this based on your requirement
+                    $("#selectedSwap").val(selectedSwap);
+
+                    $.ajax({
+                        url: '@Url.Action("Summarey", "BuyCryptoPage")',
+                        type: 'POST',
+                        data: {
+                            selectedSwap: selectedSwap,
+                            satilan: $("#satilan").val(),
+                            alinan: $("#alinan").val()
+                            miktar: $("#amountInput").val() // Include other form fields as needed
+                        },
+                        success: function (response) {
+                            // Handle the success response
+                            // You can redirect or update the page as needed
+                        },
+                        error: function (response) {
+                            // Handle the error response
+                        }
+                    });
+                } else {
+                    window.location.href = '@Url.Action("Index", "BuyCryptoPage")';
+                }
+            });
+        });
+    </script>
+}
+

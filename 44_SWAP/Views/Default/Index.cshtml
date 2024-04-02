@@ -1,0 +1,19 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+@await Html.PartialAsync("/Views/Default/Head.cshtml")
+    <body class="body header-fixed">
+    <!-- Header -->
+    @await Html.PartialAsync("/Views/Default/Navbar.cshtml")
+    <!-- end Header -->
+    @RenderBody()
+    @await Html.PartialAsync("/Views/Default/Footer.cshtml")
+    @await Html.PartialAsync("/Views/Default/Script.cshtml")
+    @RenderSection("scripts", required: false)
+  </body>
+</html>
+
